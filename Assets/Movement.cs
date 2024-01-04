@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using static UnityEngine.GraphicsBuffer;
 
 public enum Speeds { Slow = 0, Normal = 1, Fast = 2, Faster = 3, Fastest = 4 };
 public enum Gamemodes { Cube = 0, Ship = 1, Ball = 2, UFO = 3, Wave = 4, Spider = 5 };
@@ -97,16 +99,18 @@ public class Movement : MonoBehaviour
         }
     }
     //Wall collider
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Wall"))
+        if (collision.gameObject.CompareTag("wall"))
         {
             stopMovement();
         }
     }
     public void stopMovement()
+
     {
-        transform.position += Vector3.right * SpeedValues[0] * Time.deltaTime;
+        SceneManager.LoadScene(0);
 
     }
 }
