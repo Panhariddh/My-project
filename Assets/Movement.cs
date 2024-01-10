@@ -30,8 +30,11 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (Global.Playmode) { 
         transform.position += Vector3.right * SpeedValues[(int)CurrentSpeed] * Time.deltaTime;
         Invoke(CurrentGamemode.ToString(), 0);
+         
+        }
     }
 
     public bool OnGround() //Week 4 Function of player hitbox
@@ -98,6 +101,13 @@ public class Movement : MonoBehaviour
                 break;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        PortalScript portal = collision.gameObject.GetComponent<PortalScript>();
+        if (portal)
+            portal.initiatePortal(this);
+    }
     //Wall collider
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -110,7 +120,9 @@ public class Movement : MonoBehaviour
     public void stopMovement()
 
     {
-        SceneManager.LoadScene(0);
+        PlayerManager.isGameOver = true;
+        gameObject.SetActive(false);
+       // SceneManager.LoadScene(0);
 
     }
 }
