@@ -18,7 +18,7 @@ static public class generic
 
         if (Input.GetMouseButton(0))
         {
-            if (host.OnGround() && !host.clickProcessed! || onGroundRequired && !host.clickProcessed)
+            if (host.OnGround() && !host.clickProcessed || !onGroundRequired && !host.clickProcessed)
             {
                 host.clickProcessed = true;
                 rb.velocity = Vector2.up * initalVelocity * host.Gravity;
