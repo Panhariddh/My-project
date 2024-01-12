@@ -30,8 +30,11 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.position += Vector3.right * SpeedValues[(int)CurrentSpeed] * Time.deltaTime;
-        Invoke(CurrentGamemode.ToString(), 0);
+        if (Global.Playmode)
+        {
+            transform.position += Vector3.right * SpeedValues[(int)CurrentSpeed] * Time.deltaTime;
+            Invoke(CurrentGamemode.ToString(), 0);
+        }
     }
 
     public bool OnGround() //Week 4 Function of player hitbox
@@ -110,7 +113,12 @@ public class Movement : MonoBehaviour
     public void stopMovement()
 
     {
-        SceneManager.LoadScene(0);
+        PlayerManager.isGameOver = true;
+        gameObject.SetActive(false);
+        Global.Playmode = false;    
+        gameObject.SetActive(false );
+
+        //SceneManager.LoadScene(0);
 
     }
 }
